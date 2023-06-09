@@ -1,3 +1,11 @@
-FROM amazoncorretto:18
-COPY target/netty-example-1.0-SNAPSHOT.jar /opt/app/app.jar
-CMD ["java", "-jar", "/opt/app/app.jar"]
+FROM node:14
+
+WORKDIR /usr/src/app
+
+COPY package.json .
+RUN npm install 
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "index.js"]
